@@ -17,6 +17,12 @@ class ItoEsmIsolate extends EsmIsolate {
     await super._configureEnvironment()
     const context = this.context
 
+    await context.global.delete('eval')
+    await context.global.delete('Atomics')
+    await context.global.delete('WebAssembly')
+    await context.global.delete('Function')
+    await context.global.delete('AsyncFunction')
+
     const attachGlobalFn = async (name, func) => {
       await context.evalClosure(`global.${name} = function (...args) {
         return $0.applySync(undefined, args, { result: { promise: false, copy: true }, arguments: { copy: true } })

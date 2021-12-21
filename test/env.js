@@ -1,6 +1,5 @@
 const ava = require('ava')
 const { makeRuntime } = require('./util/util.js')
-const { join } = require('path')
 const uuid = require('uuid')
 
 const TEST_PUBKEY = 'f'.repeat(64)
@@ -98,4 +97,16 @@ ava('ContractOplog', async t => {
   for (let i = 0; i < 3; i++) {
     t.is(calls[i][1][0], TEST_PUBKEY2)
   }
+})
+
+ava('Removed any unsafe APIs', async t => {
+  const runtime = makeRuntime('unsafe-apis.js', {
+    ito: {
+      indexPubkey: TEST_PUBKEY,
+    }
+  })
+  await runtime.init()
+  await runtime.run()
+  await runtime.close()
+  t.pass()
 })

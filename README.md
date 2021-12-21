@@ -4,8 +4,18 @@
 
 - ES Modules only.
 - Imports disabled.
-- Custom globals (`assert`, `genUUID`, `index`, `oplog`).
 - Special handling of `apply()` export.
+- Added APIs:
+  - `assert`
+  - `genUUID`
+  - `index`
+  - `oplog`
+- Removed APIs:
+  - `eval`
+  - `Atomics`
+  - `WebAssembly`
+  - `Function`
+  - `AsyncFunction`
 
 Install:
 
