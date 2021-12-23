@@ -27,6 +27,7 @@ Options:
 
 ```typescript
 {
+  restricted: boolean, // running in restricted mode?
   env: {
     indexPubkey: string, // 64 char hex string
     oplogPubkey?: string // 64 char hex string
@@ -52,6 +53,10 @@ Options:
 ```
 
 The `__internals__` values above must be provided by the host environment.
+
+## Restricted mode
+
+In restricted mode, mutations are disabled and all async functions are resolved prior to allowing the next to execute.
 
 ## Globals
 

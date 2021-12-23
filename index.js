@@ -44,6 +44,10 @@ module.exports = class ItoConfineRuntime extends AbstractConfineRuntime {
     this.isolate.close()
   }
 
+  configure (opts) {
+    return this.isolate.configure(opts)
+  }
+
   describeAPI () {
     return this.isolate.describeAPI()
   }

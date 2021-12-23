@@ -52,17 +52,18 @@ ava('ContractIndex', async t => {
     globals: {
       __internal__: {
         contractIndex: {
-          list: (...args) => { calls.push(['list', args]); return true },
-          get: (...args) => { calls.push(['get', args]); return true },
-          listOplogs: (...args) => { calls.push(['listOplogs', args]); return true },
+          list: async (...args) => { calls.push(['list', args]); return 'list' },
+          get: async (...args) => { calls.push(['get', args]); return 'get' },
+          listOplogs: async (...args) => { calls.push(['listOplogs', args]); return 'listOplogs' },
         }
       }
     }
   })
   await runtime.init()
   await runtime.run()
-  await runtime.handleAPICall('main')
+  const res = await runtime.handleAPICall('main')
   await runtime.close()
+  t.deepEqual(res, ['list', 'list', 'get', 'listOplogs'])
   t.is(calls.length, 4)
   t.is(calls[0][0], 'list')
   t.is(calls[1][0], 'list')
