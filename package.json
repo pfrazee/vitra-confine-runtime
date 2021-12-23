@@ -9,7 +9,8 @@
   "author": "Paul Frazee <pfrazee@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "jsisolate-confine-runtime": "^0.3.1",
+    "@andrewosh/isolated-vm": "^4.1.1-prebuild2",
+    "abstract-confine-runtime": "^0.3.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

@@ -2,11 +2,10 @@ const ava = require('ava')
 const { makeRuntime } = require('./util/util.js')
 
 const TEST_PUBKEY = 'f'.repeat(64)
-const TEST_PUBKEY2 = 'e'.repeat(64)
 
-ava('put', async t => {
+ava('apply', async t => {
   const runtime = makeRuntime('apply.js', {
-    ito: {
+    env: {
       indexPubkey: TEST_PUBKEY,
     }
   })

@@ -1,6 +1,7 @@
 const ava = require('ava')
 const { makeRuntime } = require('./util/util.js')
 const { join } = require('path')
+const fsp = require('fs').promises
 
 const TEST_PUBKEY = 'f'.repeat(64)
 
@@ -8,7 +9,7 @@ ava('Basic', async t => {
   const logs = []
   const errors = []
   const runtime = makeRuntime('basic.js', {
-    ito: {
+    env: {
       indexPubkey: TEST_PUBKEY,
     },
     globals: {
@@ -30,7 +31,7 @@ ava('Basic', async t => {
 ava('Disable imports', async t => {
   const logs = []
   const runtime = makeRuntime(join('imports', 'index.js'), {
-    ito: {
+    env: {
       indexPubkey: TEST_PUBKEY,
     },
     globals: {
@@ -42,4 +43,29 @@ ava('Disable imports', async t => {
   await runtime.init()
   await t.throwsAsync(() => runtime.run())
   await runtime.close()
+})
+
+ava('Enable imports', async t => {
+  const logs = []
+  const runtime = makeRuntime(join('imports', 'index.js'), {
+    env: {
+      indexPubkey: TEST_PUBKEY,
+    },
+    globals: {
+      console: {
+        log: (...args) => logs.push(args)
+      },
+      __internal__: {
+        sys: {
+          async readSourceFile (path) {
+            return await fsp.readFile(join(__dirname, 'programs', 'imports', path), 'utf8')
+          }
+        }
+      }
+    }
+  })
+  await runtime.init()
+  await runtime.run()
+  await runtime.close()
+  t.deepEqual(logs, [ [ 'add result:', 3 ], [ 'mult result:', 2 ] ])
 })

@@ -8,7 +8,7 @@ const TEST_PUBKEY2 = 'e'.repeat(64)
 ava('genUUID()', async t => {
   const logs = []
   const runtime = makeRuntime('gen-uuid.js', {
-    ito: {
+    env: {
       indexPubkey: TEST_PUBKEY,
     },
     globals: {
@@ -33,7 +33,7 @@ ava('genUUID()', async t => {
 
 ava('assert', async t => {
   const runtime = makeRuntime('assert.js', {
-    ito: {
+    env: {
       indexPubkey: TEST_PUBKEY,
     }
   })
@@ -46,14 +46,16 @@ ava('assert', async t => {
 ava('ContractIndex', async t => {
   const calls = []
   const runtime = makeRuntime('contract-index.js', {
-    ito: {
+    env: {
       indexPubkey: TEST_PUBKEY,
     },
     globals: {
-      __contractIndexAPI: {
-        list: (...args) => { calls.push(['list', args]); return true },
-        get: (...args) => { calls.push(['get', args]); return true },
-        listOplogs: (...args) => { calls.push(['listOplogs', args]); return true },
+      __internal__: {
+        contractIndex: {
+          list: (...args) => { calls.push(['list', args]); return true },
+          get: (...args) => { calls.push(['get', args]); return true },
+          listOplogs: (...args) => { calls.push(['listOplogs', args]); return true },
+        }
       }
     }
   })
@@ -74,15 +76,17 @@ ava('ContractIndex', async t => {
 ava('ContractOplog', async t => {
   const calls = []
   const runtime = makeRuntime('contract-oplog.js', {
-    ito: {
+    env: {
       indexPubkey: TEST_PUBKEY,
       oplogPubkey: TEST_PUBKEY2
     },
     globals: {
-      __contractOplogAPI: {
-        getLength: (...args) => { calls.push(['getLength', args]); return true },
-        get: (...args) => { calls.push(['get', args]); return true },
-        append: (...args) => { calls.push(['append', args]); return true },
+      __internal__: {
+        contractOplog: {
+          getLength: (...args) => { calls.push(['getLength', args]); return true },
+          get: (...args) => { calls.push(['get', args]); return true },
+          append: (...args) => { calls.push(['append', args]); return true },
+        }
       }
     }
   })
@@ -101,7 +105,7 @@ ava('ContractOplog', async t => {
 
 ava('Removed any unsafe APIs', async t => {
   const runtime = makeRuntime('unsafe-apis.js', {
-    ito: {
+    env: {
       indexPubkey: TEST_PUBKEY,
     }
   })

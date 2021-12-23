@@ -1,3 +1,4 @@
+import assert from 'assert'
 assert(typeof eval === 'undefined', 'eval')
 assert(typeof Function === 'undefined', 'Function')
 assert(typeof AsyncFunction === 'undefined', 'AsyncFunction')
