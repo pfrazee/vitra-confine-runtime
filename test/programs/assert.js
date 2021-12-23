@@ -25,6 +25,8 @@ function shouldnt (fn) {
 
 should(() => ok(0, '0 is falsy'))
 shouldnt(() => ok(1, '1 is truthy'))
+should(() => assert.ok(0, '0 is falsy'))
+shouldnt(() => assert.ok(1, '1 is truthy'))
 should(() => assert.equal(0, 1, '0 isnt 1'))
 shouldnt(() => assert.equal(1, 1, '1 is 1'))
 should(() => assert.notEqual(0, 0, '0 is 0'))

@@ -84,13 +84,14 @@ await oplog.append(value)
 import ok, * as assert from 'assert'
 
 ok(value, message)
-deepEqual(v1, v2, message)
-doesNotMatch(str, regex, message)
-equal(v1, v2, message)
-fail(message)
-match(str, regex, message)
-notDeepEqual(v1, v2, message)
-notEqual(v1, v2, message)
+assert.ok(value, message)
+assert.deepEqual(v1, v2, message)
+assert.doesNotMatch(str, regex, message)
+assert.equal(v1, v2, message)
+assert.fail(message)
+assert.match(str, regex, message)
+assert.notDeepEqual(v1, v2, message)
+assert.notEqual(v1, v2, message)
 ```
 
 ### `util`
