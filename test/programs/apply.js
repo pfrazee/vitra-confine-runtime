@@ -7,10 +7,10 @@ export async function apply (tx, op, ack) {
       tx.delete(op.key)
       break
     case 'ADD_OPLOG':
-      tx.addContractOplog({pubkey: op.value})
+      tx.addOplog({pubkey: op.value})
       break
     case 'REMOVE_OPLOG':
-      tx.removeContractOplog({pubkey: op.value})
+      tx.removeOplog({pubkey: op.value})
       break
     case 'SET_SRC':
       tx.setContractSource({code: op.value})

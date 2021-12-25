@@ -6,10 +6,10 @@ export const apply = {
     tx.delete(op.key)
   },
   ADD_OPLOG (tx, op) {
-    tx.addContractOplog({pubkey: op.value})
+    tx.addOplog({pubkey: op.value})
   },
   REMOVE_OPLOG (tx, op) {
-    tx.removeContractOplog({pubkey: op.value})
+    tx.removeOplog({pubkey: op.value})
   },
   SET_SRC (tx, op) {
     tx.setContractSource({code: op.value})
