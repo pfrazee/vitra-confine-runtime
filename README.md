@@ -3,13 +3,11 @@
 [Confine](https://github.com/confine-sandbox/confine) runtime for "In The Open." Runs javascript in an isolate with the following properties:
 
 - ES Modules only.
-- Special handling of `apply()` export.
+- Special handling of `apply()` and other exports.
 - Builtin standard modules:
   - `assert`
+  - `contract`
   - `util`
-- Builtin globals:
-  - `index`
-  - `oplog`
 - Removed APIs:
   - `eval`
   - `Atomics`
@@ -37,15 +35,11 @@ Options:
       sys: {
         readSourceFile (specifier: string): Promise<string>
       },
-      contractIndex: {
-        list: Function
-        get: Function
-        listOplogs: Function
-      },
-      contractOplog: {
-        getLength: Function
-        get: Function
-        append: Function
+      contract: {
+        indexList: Function
+        indexGet: Function
+        oplogGetLength: Function
+        oplogGet: Function
       }
     }
   }
@@ -57,24 +51,6 @@ The `__internals__` values above must be provided by the host environment.
 ## Restricted mode
 
 In restricted mode, mutations are disabled and all async functions are resolved prior to allowing the next to execute.
-
-## Globals
-
-### `index`
-
-```javascript
-await index.list(prefix, opts)
-await index.get(key)
-await index.listOplogs()
-```
-
-### `oplog`
-
-```javascript
-await oplog.getLength()
-await oplog.get(seq)
-await oplog.append(value)
-```
 
 ## Standard Modules
 
@@ -92,6 +68,19 @@ assert.fail(message)
 assert.match(str, regex, message)
 assert.notDeepEqual(v1, v2, message)
 assert.notEqual(v1, v2, message)
+```
+
+### `contract`
+
+```javascript
+import { index, oplog, isWriter, listOplogs } from 'contract'
+
+listOplogs() // => ContractOplog[]
+isWriter // boolean
+await index.list(prefix, opts)
+await index.get(key)
+await oplog.getLength()
+await oplog.get(seq)
 ```
 
 ### `util`

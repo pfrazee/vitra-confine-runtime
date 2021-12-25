@@ -3,7 +3,3 @@ export async function slowFunc () {
   await sleep(500)
   console.log('end')
 }
-
-export async function doAppend () {
-  return await oplog.append({op: 'SOME_OP'})
-}
