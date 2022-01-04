@@ -36,19 +36,19 @@ ava('apply', async t => {
   })
   t.deepEqual(await runtime.handleAPICall('apply', [{op: 'ADD_OPLOG', value: TEST_PUBKEY}, {}]), {
     actions: {
-      [`/.sys/inputs/${TEST_PUBKEY}`]: {type: 'put', value: {pubkey: TEST_PUBKEY}}
+      [`/.sys/_action0`]: {type: 'addOplog', value: {pubkey: TEST_PUBKEY}}
     }
   })
   await t.throwsAsync(() => runtime.handleAPICall('apply', [{op: 'ADD_OPLOG', value: 'asdf'}, {}]))
   t.deepEqual(await runtime.handleAPICall('apply', [{op: 'REMOVE_OPLOG', value: TEST_PUBKEY}, {}]), {
     actions: {
-      [`/.sys/inputs/${TEST_PUBKEY}`]: {type: 'delete'}
+      [`/.sys/_action0`]: {type: 'removeOplog', value: {pubkey: TEST_PUBKEY}}
     }
   })
   await t.throwsAsync(() => runtime.handleAPICall('apply', [{op: 'REMOVE_OPLOG', value: 'asdf'}, {}]))
   t.deepEqual(await runtime.handleAPICall('apply', [{op: 'SET_SRC', value: 'cool()'}, {}]), {
     actions: {
-      '/.sys/contract/source': {type: 'put', value: 'cool()'}
+      '/.sys/_action0': {type: 'setContractSource', value: {code: 'cool()'}}
     }
   })
   await t.throwsAsync(() => runtime.handleAPICall('apply', [{op: 'SET_SRC'}, {}]))
@@ -88,19 +88,19 @@ ava('apply2', async t => {
   })
   t.deepEqual(await runtime.handleAPICall('apply', [{op: 'ADD_OPLOG', value: TEST_PUBKEY}, {}]), {
     actions: {
-      [`/.sys/inputs/${TEST_PUBKEY}`]: {type: 'put', value: {pubkey: TEST_PUBKEY}}
+      [`/.sys/_action0`]: {type: 'addOplog', value: {pubkey: TEST_PUBKEY}}
     }
   })
   await t.throwsAsync(() => runtime.handleAPICall('apply', [{op: 'ADD_OPLOG', value: 'asdf'}, {}]))
   t.deepEqual(await runtime.handleAPICall('apply', [{op: 'REMOVE_OPLOG', value: TEST_PUBKEY}, {}]), {
     actions: {
-      [`/.sys/inputs/${TEST_PUBKEY}`]: {type: 'delete'}
+      [`/.sys/_action0`]: {type: 'removeOplog', value: {pubkey: TEST_PUBKEY}}
     }
   })
   await t.throwsAsync(() => runtime.handleAPICall('apply', [{op: 'REMOVE_OPLOG', value: 'asdf'}, {}]))
   t.deepEqual(await runtime.handleAPICall('apply', [{op: 'SET_SRC', value: 'cool()'}, {}]), {
     actions: {
-      '/.sys/contract/source': {type: 'put', value: 'cool()'}
+      '/.sys/_action0': {type: 'setContractSource', value: {code: 'cool()'}}
     }
   })
   await t.throwsAsync(() => runtime.handleAPICall('apply', [{op: 'SET_SRC'}, {}]))
