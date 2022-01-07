@@ -31,7 +31,7 @@ ava('apply', async t => {
   await t.throwsAsync(() => runtime.handleAPICall('apply', [{op: 'PUT', key: '//////'}, {}]))
   t.deepEqual(await runtime.handleAPICall('apply', [{op: 'DEL', key: 'foo'}, {}]), {
     actions: {
-      '/foo': {type: 'delete'}
+      '/foo': {type: 'del'}
     }
   })
   t.deepEqual(await runtime.handleAPICall('apply', [{op: 'ADD_OPLOG', value: TEST_PUBKEY}, {}]), {
@@ -83,7 +83,7 @@ ava('apply2', async t => {
   await t.throwsAsync(() => runtime.handleAPICall('apply', [{op: 'PUT', key: '//////'}, {}]))
   t.deepEqual(await runtime.handleAPICall('apply', [{op: 'DEL', key: 'foo'}, {}]), {
     actions: {
-      '/foo': {type: 'delete'}
+      '/foo': {type: 'del'}
     }
   })
   t.deepEqual(await runtime.handleAPICall('apply', [{op: 'ADD_OPLOG', value: TEST_PUBKEY}, {}]), {
