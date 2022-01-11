@@ -1,6 +1,6 @@
-# "In The Open" Confine Runtime
+# Vitra Confine Runtime
 
-[Confine](https://github.com/confine-sandbox/confine) runtime for "In The Open." Runs javascript in an isolate with the following properties:
+[Confine](https://github.com/confine-sandbox/confine) runtime for [Vitra](https://github.com/pfrazee/vitra). Runs javascript in an isolate with the following properties:
 
 - ES Modules only.
 - Special handling of `apply()` and other exports.
@@ -18,7 +18,7 @@
 Install:
 
 ```
-npm i ito-confine-runtime
+npm i vitra-confine-runtime
 ```
 
 Options:

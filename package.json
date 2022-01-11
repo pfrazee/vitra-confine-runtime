@@ -1,7 +1,7 @@
 {
-  "name": "ito-confine-runtime",
+  "name": "vitra-confine-runtime",
   "version": "0.4.0",
-  "description": "Confine runtime for ITO.",
+  "description": "Confine runtime for Vitra.",
   "main": "index.js",
   "scripts": {
     "test": "ava test/*.js"

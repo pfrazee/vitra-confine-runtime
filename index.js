@@ -1,9 +1,9 @@
 const path = require('path')
-const { ItoEsmIsolate } = require('./lib/isolate.js')
+const { VitraEsmIsolate } = require('./lib/isolate.js')
 const { AbstractConfineRuntime } = require('abstract-confine-runtime')
 const assert = require('assert').strict
 
-module.exports = class ItoConfineRuntime extends AbstractConfineRuntime {
+module.exports = class VitraConfineRuntime extends AbstractConfineRuntime {
   constructor (opts) {
     super(opts)
     this.isolate = undefined
@@ -17,8 +17,8 @@ module.exports = class ItoConfineRuntime extends AbstractConfineRuntime {
       assert.match(this.opts.env.oplogPubkey, /^[0-9a-f]{64}$/i, 'env.oplogPubkey option must be a 64 character hex string')
     }
 
-    this.isolate = new ItoEsmIsolate(this.source.toString('utf-8'), {
-      path: this.opts.path || '/ito-vm-virtual-path/index.js',
+    this.isolate = new VitraEsmIsolate(this.source.toString('utf-8'), {
+      path: this.opts.path || '/vitra-vm-virtual-path/index.js',
       globals: this.opts.globals,
       env: this.opts.env
     })

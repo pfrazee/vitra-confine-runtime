@@ -1,6 +1,6 @@
 const {readFileSync} = require('fs')
 const {join} = require('path')
-const ItoConfineRuntime = require('../../index.js')
+const VitraConfineRuntime = require('../../index.js')
 
 const get = path => readFileSync(path)
 
@@ -12,5 +12,5 @@ exports.makeRuntime = (programPath, opts = {}) => {
     env: opts.env || 'vanilla',
     module: opts.module || 'cjs'
   })
-  return new ItoConfineRuntime(opts)
+  return new VitraConfineRuntime(opts)
 }
