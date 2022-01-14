@@ -1,6 +1,6 @@
 {
   "name": "vitra-confine-runtime",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Confine runtime for Vitra.",
   "main": "index.js",
   "scripts": {
