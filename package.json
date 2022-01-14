@@ -11,6 +11,7 @@
   "dependencies": {
     "@andrewosh/isolated-vm": "^4.1.1-prebuild2",
     "abstract-confine-runtime": "^0.4.0",
+    "commonjs-assert": "browserify/commonjs-assert",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

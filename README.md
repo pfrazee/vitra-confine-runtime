@@ -62,10 +62,8 @@ import ok, * as assert from 'assert'
 ok(value, message)
 assert.ok(value, message)
 assert.deepEqual(v1, v2, message)
-assert.doesNotMatch(str, regex, message)
 assert.equal(v1, v2, message)
 assert.fail(message)
-assert.match(str, regex, message)
 assert.notDeepEqual(v1, v2, message)
 assert.notEqual(v1, v2, message)
 ```
